@@ -10,9 +10,14 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
 COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
 RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then umask 0002 && /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
-    && rm -rf /tmp/conda-tmp
+    && rm -rf /tmp/conda-tmp  
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
-RUN conda create -y -n myenv python=3.9 pandas jupyter seaborn scikit-learn keras tensorflow 
+RUN conda config --add channels conda-forge \
+    && conda config --set channel_priority strict \
+    && conda create -y -n myenv python=3.10 pandas jupyter seaborn scikit-learn keras tensorflow geopandas keplergl \
+    && conda init zsh \
+    && echo "conda activate myenv" >> ~/.zshrc
+ENV SHELL /bin/zsh

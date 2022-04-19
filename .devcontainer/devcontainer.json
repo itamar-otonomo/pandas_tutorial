@@ -12,7 +12,7 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-		"python.defaultInterpreterPath": "/opt/conda/bin/python",
+		"python.defaultInterpreterPath": "/opt/conda/envs/myenv/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/opt/conda/bin/autopep8",
@@ -21,12 +21,14 @@
 		"python.linting.pycodestylePath": "/opt/conda/bin/pycodestyle",
 		"python.linting.pydocstylePath": "/opt/conda/bin/pydocstyle",
 		"python.linting.pylintPath": "/opt/conda/bin/pylint",
+		"python.analysis.extraPaths": [
+			"/workspaces/pandas_tutorial/bobo"
+		]
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
-		"ms-python.vscode-pylance",
 		"ms-toolsai.jupyter",
 		"ms-azuretools.vscode-docker",
 	],
