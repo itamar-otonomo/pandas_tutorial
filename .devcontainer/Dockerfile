@@ -18,6 +18,7 @@ RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then umask 0002 && /opt/conda/bi
 RUN conda config --add channels conda-forge \
     && conda config --set channel_priority strict \
     && conda create -y -n myenv python=3.10 pandas jupyter seaborn scikit-learn keras tensorflow geopandas keplergl \
-    && conda init zsh \
-    && echo "conda activate myenv" >> ~/.zshrc
+    && su vscode -c "conda init zsh" \
+    && echo "conda activate myenv" >> /home/vscode/.zshrc
+
 ENV SHELL /bin/zsh
